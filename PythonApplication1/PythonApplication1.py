@@ -1,5 +1,4 @@
 import random
-from re import search
 
 def generate_chromosomes(number,length):
     chromosomes=[]
@@ -83,18 +82,18 @@ for j in range(runs):
         avr_fitness.append(sum(fitnessess)/len(fitnessess))
         probabilities=calculate_probability(fitnessess)
         cummulative_prob= calculate_cummulative(probabilities)
-        new_pop=[]
-        while len(new_pop)<len(chromosomes):
+        new_population=[]
+        while len(new_population)<len(chromosomes):
             selection=[]
             selection.append(select(chromosomes,cummulative_prob))
             selection.append(select(chromosomes,cummulative_prob))
             offspring= crossover(selection[0],selection[1],pcross,int(ch_length/2))
-            new_pop.append(mutation(offspring[0],pmut))
-            new_pop.append(mutation(offspring[1],pmut))
-        new_pop=new_pop[0:18]
+            new_population.append(mutation(offspring[0],pmut))
+            new_population.append(mutation(offspring[1],pmut))
+        new_population=new_population[0:18]
         best=choose_elite(chromosomes,fitnessess)
-        new_pop.extend(best)
-        chromosomes=new_pop.copy()
+        new_population.extend(best)
+        chromosomes=new_population.copy()
         if i==generations-1:
             print("final population: \n",chromosomes,"\n")
     print("best fitness history: \n",best_fitness,"\n")
